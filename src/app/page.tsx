@@ -54,7 +54,7 @@ export default function UTMBuilder() {
             <div className="space-y-2">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
-                <Label htmlFor="pageUrl" className="block text-gray-600">Provide campaign link:</Label>
+                <Label htmlFor="pageUrl" className="block text-base">Provide campaign link</Label>
               </div>
               <Input
                 id="pageUrl"
@@ -67,7 +67,7 @@ export default function UTMBuilder() {
             <div className="space-y-2">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
-                <Label htmlFor="source" className="block text-gray-600">Indicate the source you want to be displayed:</Label>
+                <Label htmlFor="source" className="block text-base">Indicate the source you want to be displayed</Label>
               </div>
               <Input
                 id="source"
@@ -80,14 +80,14 @@ export default function UTMBuilder() {
             <div className="space-y-2">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
-                <Label htmlFor="finalUrl" className="block text-gray-600">That's it, here is the link you can use:</Label>
+                <Label htmlFor="finalUrl" className="block text-base">That&apos;s it, here is the link you can use</Label>
               </div>
               <Textarea
                 id="finalUrl"
                 value={finalUrl}
                 readOnly
                 className="w-full h-32 bg-gray-50 text-sm mt-2"
-                placeholder="Your UTM link will appear here..."
+                placeholder="Your link will appear here..."
               />
             </div>
           </div>
