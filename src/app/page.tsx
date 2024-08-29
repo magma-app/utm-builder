@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Copy, Link } from "lucide-react"
+import { Copy, Link, QrCode } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -14,12 +14,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import QRCode from 'qrcode'
+import { format } from 'date-fns'
 
 export default function UTMBuilder() {
   const [pageUrl, setPageUrl] = useState('')
   const [source, setSource] = useState('')
   const [finalUrl, setFinalUrl] = useState('')
   const [copied, setCopied] = useState(false)
+  const [qrCodeUrl, setQrCodeUrl] = useState('')
 
   useEffect(() => {
     if (pageUrl) {
@@ -35,11 +38,35 @@ export default function UTMBuilder() {
     }
   }, [pageUrl, source])
 
+  useEffect(() => {
+    if (finalUrl) {
+      QRCode.toDataURL(finalUrl, { width: 300, margin: 2 })
+        .then(url => setQrCodeUrl(url))
+        .catch(err => console.error(err))
+    } else {
+      setQrCodeUrl('')
+    }
+  }, [finalUrl])
+
   const handleCopy = () => {
     if (finalUrl) {
       navigator.clipboard.writeText(finalUrl)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
+  const handleDownloadQR = () => {
+    if (qrCodeUrl) {
+      const currentDate = format(new Date(), 'yyyy-MM-dd')
+      const fileName = `${currentDate}-Magma link-${source || 'unknown'}.png`
+      
+      const link = document.createElement('a')
+      link.href = qrCodeUrl
+      link.download = fileName
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     }
   }
 
@@ -58,7 +85,7 @@ export default function UTMBuilder() {
               </div>
               <Input
                 id="pageUrl"
-                placeholder="https://example.com"
+                placeholder="https://magma.am/"
                 value={pageUrl}
                 onChange={(e) => setPageUrl(e.target.value)}
                 className="w-full mt-2"
@@ -71,7 +98,7 @@ export default function UTMBuilder() {
               </div>
               <Input
                 id="source"
-                placeholder="facebook"
+                placeholder="newsletter-juin"
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
                 className="w-full mt-2"
@@ -80,7 +107,7 @@ export default function UTMBuilder() {
             <div className="space-y-2">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
-                <Label htmlFor="finalUrl" className="block text-base">That&apos;s it, here is the link you can use</Label>
+                <Label htmlFor="finalUrl" className="block text-base">That's it, here is the link you can use</Label>
               </div>
               <Textarea
                 id="finalUrl"
@@ -91,13 +118,21 @@ export default function UTMBuilder() {
               />
             </div>
           </div>
-          <div className="bg-gray-100 p-4 flex justify-end">
+          <div className="bg-gray-100 p-4 flex justify-end space-x-2">
             <Button
               onClick={handleCopy}
               className={`flex items-center ${copied ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'}`}
             >
               <Copy className="w-4 h-4 mr-2" />
               {copied ? 'Copied!' : 'Copy Link'}
+            </Button>
+            <Button
+              onClick={handleDownloadQR}
+              className="flex items-center bg-purple-500 hover:bg-purple-600"
+              disabled={!finalUrl}
+            >
+              <QrCode className="w-4 h-4 mr-2" />
+              Download QR Code
             </Button>
           </div>
         </div>
@@ -138,7 +173,7 @@ export default function UTMBuilder() {
                     <TableCell>
                       <div className="flex items-center">
                         <Link className="h-4 w-4 mr-2" />
-                        <span>{source || 'newsletter-june'}</span>
+                        <span>{source || 'newsletter-juin'}</span>
                       </div>
                     </TableCell>
                   </TableRow>
