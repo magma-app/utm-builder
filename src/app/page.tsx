@@ -131,7 +131,7 @@ export default function UTMBuilder() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <div className="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/joris-square-profil-4AzQ1uTcRMIRcQBbgkxW4fBrdvhRMb.png" alt="Joris Renaud" className="w-8 h-8 rounded-full mr-2 object-cover" />
                         <span>Joris Renaud</span>
                       </div>
                     </TableCell>
