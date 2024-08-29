@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'UTM Builder',
-  description: 'Build UTM links for marketing campaigns',
+  title: 'Magma relation source generator',
+  description: 'Generate prospect links to know where do relations come from',
 }
 
 export default function RootLayout({
