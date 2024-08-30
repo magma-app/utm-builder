@@ -107,7 +107,7 @@ export default function UTMBuilder() {
             <div className="space-y-2">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
-                <Label htmlFor="finalUrl" className="block text-base">That's it, here is the link you can use</Label>
+                <Label htmlFor="finalUrl" className="block text-base"> Here is the link you can use </Label>
               </div>
               <Textarea
                 id="finalUrl"
