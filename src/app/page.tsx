@@ -28,7 +28,7 @@ export default function UTMBuilder() {
     if (pageUrl) {
       try {
         const url = new URL(pageUrl)
-        url.searchParams.set('utm_source', source)
+        url.searchParams.set('source', source)
         setFinalUrl(url.toString())
       } catch (e) {
         setFinalUrl('')
